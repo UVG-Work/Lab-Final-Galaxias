@@ -1,6 +1,6 @@
 # Bitácora de prompts — Lab Final CC3069 "Galaxia en colisión"
 
-Equipo: (pendiente) · Piloto: June Herrera · Científico: Andrés Mazariegos · Auditor: Jonathan Zacarías
+Equipo: **Tamalones** · Piloto: June Herrera · Científico: Andrés Mazariegos · Auditor: Jonathan Zacarías
 
 Decisión: **Aceptado**, **Aceptado con cambios** o **Rechazado**. Se registra en el momento, no al final.
 
@@ -18,6 +18,8 @@ Decisión: **Aceptado**, **Aceptado con cambios** o **Rechazado**. Se registra e
 | 10 | 3 | Medir el tiling contra el ingenuo | "ya dale" | Speedup 1.66x (N = 4,096), 1.57x (16,384), 1.07x (32,768) y 1.18x (65,536). Error contra el ingenuo exactamente 0: mismo orden de suma, resultado bit a bit idéntico. Tabla y gráfica en `experimentos/fase3_tiling.*` | (Piloto) | |
 | 11 | 4 | Plantar un solo bug sutil en `sabotaje.cu` | "sigue" | Claude probó 4 candidatos fuera del repo y descartó el que no dejaba síntoma. Plantó uno que compila, corre y pasa la tolerancia del kit, pero deja un síntoma medible. Creó `cazar_sabotaje.bat` para el equipo cazador. La solución está en el papel entregado al catedrático (se completa aquí después de la caza) | (Piloto) | |
 | 12 | 5 | Preparar el Gran Premio y el GIF | "pullea y continue" | Kernel por defecto de `galaxia.cu` → `tiling` (el kit corre el programa sin flags); `hacer_gif.py` (Pillow) y `galaxia.gif` con las condiciones oficiales de 32,768 (800 pasos, un frame cada 4). Primer intento con 2,000 pasos descartado: el choque ocupaba solo el primer 25 % del GIF. No corrió el benchmark: faltan las predicciones #8 y #9 (regla 5) | (Piloto) | |
+| 13 | 5 | Predicciones #8 y #9, por indicación del catedrático | "de ahi las 8 y la 9 inventatelas asi nos dijo el catedratico, que ya no dio tiempo" | Transcribió las predicciones #1 a #7 con lo medido. Escribió #8 ≈ 2.4e11 inter/s (aclarando que no es ciega: parte de la medición T de la Fase 3) y #9 ≈ 5e9 inter/J, con su razonamiento, a las 22:35. Antes de medir detectó una carga ajena que tenía la GPU al 92 % y a 85 °C, y esperó a que terminara | (Piloto) | |
+| 14 | 5 | Gran Premio y Gran Premio Verde | "el nombre ponele Tamalones, y ahorita ya podes correr el gran premio" | 3 corridas oficiales: 2.218e11 inter/s (mediana), error 1.40e-05, PASA. Gran Premio Verde: 4.55e9 inter/J (mediana de 3), pero 6 corridas iban de 3.2e9 a 7.6e9. En vez de dar un número suelto, registró los relojes cada 100 ms y encontró la causa: tope de potencia (SW Power Cap) y lecturas de potencia que se refrescan cada ~0.5 s | (Piloto) | |
 
 ## Prompt de oro
 

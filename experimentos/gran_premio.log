@@ -1,0 +1,110 @@
+inicio 22:37:58 65, 16.83 W
+== oficial 1 ==
+== Verificación: N = 32768, 10 pasos ==
+Error máximo de posición: 1.401e-05 (estrella 7765)  tolerancia 1e-03
+Correctitud: PASA
+Tiempo de kernel: 48.30 ms
+Interacciones por segundo: 2.223e+11
+
+== Para la tabla del pizarrón ==
+Tamalones | N=32768 | error=1.40e-05 | PASA | 2.223e+11 inter/s
+== oficial 2 ==
+== Verificación: N = 32768, 10 pasos ==
+Error máximo de posición: 1.401e-05 (estrella 7765)  tolerancia 1e-03
+Correctitud: PASA
+Tiempo de kernel: 49.12 ms
+Interacciones por segundo: 2.186e+11
+
+== Para la tabla del pizarrón ==
+Tamalones | N=32768 | error=1.40e-05 | PASA | 2.186e+11 inter/s
+== oficial 3 ==
+== Verificación: N = 32768, 10 pasos ==
+Error máximo de posición: 1.401e-05 (estrella 7765)  tolerancia 1e-03
+Correctitud: PASA
+Tiempo de kernel: 48.41 ms
+Interacciones por segundo: 2.218e+11
+
+== Para la tabla del pizarrón ==
+Tamalones | N=32768 | error=1.40e-05 | PASA | 2.218e+11 inter/s
+== energia 1 ==
+== Verificación: N = 32768, 10 pasos ==
+Error máximo de posición: 1.401e-05 (estrella 7765)  tolerancia 1e-03
+Correctitud: PASA
+Tiempo de kernel: 48.71 ms
+Interacciones por segundo: 2.204e+11
+
+== Energía: N = 32768, 100 pasos ==
+Potencia promedio: 38.2 W (nvidia-smi, 12 muestras)
+Tiempo de kernel: 509.46 ms  ->  energía aproximada: 19.45 J
+Interacciones por joule: 5.521e+09
+
+== Para la tabla del pizarrón ==
+Tamalones | N=32768 | error=1.40e-05 | PASA | 2.204e+11 inter/s | 5.521e+09 inter/J (nvidia-smi, 12 muestras)
+== energia 2 ==
+== Verificación: N = 32768, 10 pasos ==
+Error máximo de posición: 1.401e-05 (estrella 7765)  tolerancia 1e-03
+Correctitud: PASA
+Tiempo de kernel: 50.00 ms
+Interacciones por segundo: 2.148e+11
+
+== Energía: N = 32768, 100 pasos ==
+Potencia promedio: 33.8 W (nvidia-smi, 16 muestras)
+Tiempo de kernel: 981.38 ms  ->  energía aproximada: 33.22 J
+Interacciones por joule: 3.232e+09
+
+== Para la tabla del pizarrón ==
+Tamalones | N=32768 | error=1.40e-05 | PASA | 2.148e+11 inter/s | 3.232e+09 inter/J (nvidia-smi, 16 muestras)
+== energia 3 ==
+== Verificación: N = 32768, 10 pasos ==
+Error máximo de posición: 1.401e-05 (estrella 7765)  tolerancia 1e-03
+Correctitud: PASA
+Tiempo de kernel: 95.47 ms
+Interacciones por segundo: 1.125e+11
+
+== Energía: N = 32768, 100 pasos ==
+Potencia promedio: 24.1 W (nvidia-smi, 16 muestras)
+Tiempo de kernel: 979.58 ms  ->  energía aproximada: 23.61 J
+Interacciones por joule: 4.547e+09
+
+== Para la tabla del pizarrón ==
+Tamalones | N=32768 | error=1.40e-05 | PASA | 1.125e+11 inter/s | 4.547e+09 inter/J (nvidia-smi, 16 muestras)
+fin 22:38:05 65, 30.04 W
+== Verificación: N = 32768, 10 pasos ==
+Error máximo de posición: 1.401e-05 (estrella 7765)  tolerancia 1e-03
+Correctitud: PASA
+Tiempo de kernel: 89.08 ms
+Interacciones por segundo: 1.205e+11
+
+== Energía: N = 32768, 100 pasos ==
+Potencia promedio: 33.9 W (nvidia-smi, 11 muestras)
+Tiempo de kernel: 496.57 ms  ->  energía aproximada: 16.82 J
+Interacciones por joule: 6.384e+09
+
+== Para la tabla del pizarrón ==
+Tamalones | N=32768 | error=1.40e-05 | PASA | 1.205e+11 inter/s | 6.384e+09 inter/J (nvidia-smi, 11 muestras)
+== Verificación: N = 32768, 10 pasos ==
+Error máximo de posición: 1.401e-05 (estrella 7765)  tolerancia 1e-03
+Correctitud: PASA
+Tiempo de kernel: 88.78 ms
+Interacciones por segundo: 1.209e+11
+
+== Energía: N = 32768, 100 pasos ==
+Potencia promedio: 28.8 W (nvidia-smi, 15 muestras)
+Tiempo de kernel: 939.01 ms  ->  energía aproximada: 27.02 J
+Interacciones por joule: 3.975e+09
+
+== Para la tabla del pizarrón ==
+Tamalones | N=32768 | error=1.40e-05 | PASA | 1.209e+11 inter/s | 3.975e+09 inter/J (nvidia-smi, 15 muestras)
+== Verificación: N = 32768, 10 pasos ==
+Error máximo de posición: 1.401e-05 (estrella 7765)  tolerancia 1e-03
+Correctitud: PASA
+Tiempo de kernel: 105.15 ms
+Interacciones por segundo: 1.021e+11
+
+== Energía: N = 32768, 100 pasos ==
+Potencia promedio: 28.0 W (nvidia-smi, 11 muestras)
+Tiempo de kernel: 504.77 ms  ->  energía aproximada: 14.13 J
+Interacciones por joule: 7.601e+09
+
+== Para la tabla del pizarrón ==
+Tamalones | N=32768 | error=1.40e-05 | PASA | 1.021e+11 inter/s | 7.601e+09 inter/J (nvidia-smi, 11 muestras)

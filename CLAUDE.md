@@ -1,6 +1,6 @@
 # CLAUDE.md — Lab Final CC3069 "Galaxia en colisión"
 
-Equipo: **(pendiente)** · Piloto: June Herrera · Científico: Andrés Mazariegos · Auditor: Jonathan Zacarías
+Equipo: **Tamalones** · Piloto: June Herrera · Científico: Andrés Mazariegos · Auditor: Jonathan Zacarías
 (Los roles rotan en la Fase 4: el Auditor pasa a Piloto.)
 
 El contrato de entrada/salida, la física y la medición están en `kit_galaxia/README.md`. **Cumplirlo es obligatorio**; ante cualquier duda, manda el README sobre este archivo. No modificar nada en `kit_galaxia/datos/`.
@@ -20,7 +20,7 @@ El contrato de entrada/salida, la física y la medición están en `kit_galaxia/
 
 - **Compilar:** `nvcc -O3 -arch=sm_120 -o galaxia galaxia.cu` (RTX 5070 Laptop, compute capability 12.0, CUDA 13.4). En Windows sale `galaxia.exe`.
 - **Python:** usar `python` (3.12). `python3` no existe en PowerShell.
-- **Verificar:** `python kit_galaxia/verificar_y_medir.py ./galaxia.exe --equipo "<equipo>" --n 4096`.
+- **Verificar:** `python kit_galaxia/verificar_y_medir.py ./galaxia.exe --equipo "Tamalones" --n 4096`.
 - **Línea de comandos:** `galaxia <entrada.bin> <salida.bin> <pasos> [--kernel ingenuo|tiling] [--bloque B] [--frames K] [--cpu-pasos P] [--vs-ingenuo]` y `galaxia --generar <N> <salida.bin>`. Todo lo opcional va con flags. Sin flags, el programa no escribe imágenes ni hace copias extra (así lo corre el benchmark oficial).
 - **Verificación CPU por defecto:** completa si N²·pasos ≤ 4e9; si no, solo el paso 1 con una muestra de 1024 estrellas. Así no tarda minutos ni diluye la potencia promedio del Gran Premio Verde.
 - **Física:** `float`, las constantes de `kit_galaxia/parametros.h` (`#include` del archivo, sin copiar los valores). Primero se calculan las aceleraciones de todas las estrellas y después `v += a·DT` y `r += v·DT` con la `v` nueva. La suma incluye `j = i`.
