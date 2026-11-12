@@ -1,0 +1,9 @@
+*.exe
+*.exp
+*.lib
+*.pdb
+*.obj
+frames/
+salida*.bin
+datos_generados/
+__pycache__/

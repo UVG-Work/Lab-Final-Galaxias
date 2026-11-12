@@ -1,0 +1,5 @@
+N,gpu_ms_por_paso,cpu_ms_por_paso,pasos_cpu_medidos,speedup,factor_gpu_vs_N_anterior,factor_cpu_vs_N_anterior,porcentaje_memcpy,error_gpu_cpu
+1024,0.13070,3.040,10,23.26,nan,nan,11.480,2.675e-07
+4096,0.53540,43.840,10,81.88,4.096,14.421,3.790,4.768e-07
+16384,2.24230,711.490,10,317.30,4.188,16.229,1.800,4.915e-07
+65536,21.06720,12200.800,1,579.14,9.395,17.148,0.420,4.769e-07

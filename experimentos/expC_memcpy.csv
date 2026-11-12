@@ -1,0 +1,8 @@
+programa,N,kernel_ms,memcpy_ms,porcentaje_memcpy,amdahl_speedup_max,speedup_gpu_vs_cpu_con_memcpy
+suma_vectores,1048576,0.0438,1.6235,97.373,1.027,0.350
+suma_vectores,4194304,0.1235,5.9802,97.977,1.021,0.390
+suma_vectores,16777216,0.5941,21.8890,97.358,1.027,0.400
+suma_vectores,67108864,2.4654,83.9357,97.147,1.029,0.410
+nbody,4096,5.4071,0.2587,4.566,21.901,86.600
+nbody,16384,22.3898,0.3259,1.435,69.701,347.200
+nbody,65536,210.8810,0.9576,0.452,221.218,553.800
