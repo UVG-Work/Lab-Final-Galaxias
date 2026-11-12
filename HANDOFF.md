@@ -1,62 +1,56 @@
 # Handoff — Lab Final CC3069 "Galaxia en colisión"
 
-Fecha: 2026-11-11. Enunciado: `Laboratorio_Final_CC3069_Galaxia_en_colision.pdf`. Kit oficial: `kit_galaxia/` (extraído de `kit_galaxia.zip`, no modificar `kit_galaxia/datos/`).
+Actualizado: 2026-11-11, durante el lab en vivo, al pasar a la Fase 4 (caza).
+Enunciado: `Laboratorio_Final_CC3069_Galaxia_en_colision.pdf`. Kit: `kit_galaxia/` (no modificar `kit_galaxia/datos/`).
 
-## Estado
+**Equipo:** nombre **pendiente** (lo pide `verificar_y_medir.py --equipo`). Piloto: June Herrera · Científico: Andrés Mazariegos · Auditor: Jonathan Zacarías. En la Fase 4 rotan: Jonathan pasa a Piloto.
 
-- **No hay código todavía.** Solo se leyeron el PDF y el kit, y se revisó la máquina.
-- **No se ha corrido nada**, así que las 9 predicciones de la hoja siguen limpias. Escríbanlas **antes** de ejecutar: una predicción escrita después vale cero.
+## Estado por fase
 
-## Máquina (verificado)
+| Fase | Estado | Resultado clave |
+|---|---|---|
+| 0 | Hecha | `CLAUDE.md` con las 4 reglas + la regla propia (Claude no ejecuta experimentos hasta que el Científico confirme la predicción escrita) |
+| 1 | Hecha | Kernel ingenuo. Kit N = 4,096: error 9.8e-07, PASA. Speedup ~60x (51x a 78x), memcpy ~3.7 %. Predicciones a mano: 30x y 10 % |
+| 2 | Hecha | A: de 32 a 512 hilos empatan (~22.4 ms), 1,024 es 17 % más lento. B: CPU ≈ N²; GPU casi lineal hasta 16,384, ×9.4 al pasar a 65,536. C: suma de vectores 97 % en memcpy (pierde contra la CPU, 0.4x); N-body 4.6 % a 0.45 % |
+| 3 | Hecha | Tiling: 1.66x (4,096), 1.57x (16,384), 1.07x (32,768), 1.18x (65,536). Error contra el ingenuo = 0 (bit a bit idéntico) |
+| 4 | **En curso** | Bug plantado en `sabotaje.cu`. **La solución está SOLO en el papel entregado al catedrático** (no se escribe aquí: el equipo cazador usa esta laptop). Falta: cazar el bug del equipo vecino, sin IA |
+| 5 | Pendiente | Ver abajo |
+| Reflexión | Pendiente | Individual, 5 preguntas (página 5 del PDF) |
+
+Tablas y gráficas en `experimentos/`. Mediciones crudas de la Fase 1 en `experimentos/fase1_n4096.md`.
+
+## Pendientes, en orden
+
+1. **Antes de cerrar esta sesión: `/export` → `prompts.md`.** Es un entregable: el historial completo de Claude Code.
+2. **Fase 4, caza:** hipótesis escrita sin IA (línea, tipo de bug y por qué causa el síntoma). Después se puede usar Claude para confirmar y corregir. Guardar la hipótesis y la corrección para el "reporte de sabotaje" (entregable 5).
+3. **Después de la caza:** completar la entrada 11 de `bitacora.md` con la solución del bug propio, y hacer commit de `sabotaje.cu` y `cazar_sabotaje.bat`. **No se subieron a GitHub a propósito.**
+4. **Fase 5, Gran Premio:**
+   - Andrés escribe a mano las predicciones **#8** (inter/s) y **#9** (inter/J) **antes** de correr.
+   - **Cambiar el kernel por defecto de `galaxia.cu` a `tiling`.** El script del kit corre `galaxia.exe` sin flags, y hoy el default es `ingenuo`.
+   - Opcional: optimizar (por ejemplo `rsqrtf`, `#pragma unroll`, otro tamaño de tile), siempre con error < 1e-3 contra la referencia del kit. Hoy el tiling da ~2.4e11 inter/s con N = 32,768.
+   - Antes de medir: dejar enfriar la GPU, pausar OneDrive y cerrar launchers.
+   - `python kit_galaxia/verificar_y_medir.py ./galaxia.exe --equipo "<nombre>"` y luego lo mismo con `--energia`. Anotar en la tabla del pizarrón.
+5. **GIF:** `galaxia.exe <entrada> <salida> <pasos> --kernel tiling --frames K` escribe `frames/frame_XXXX.ppm`. Falta el script que arma el GIF; Pillow 12.3 ya está instalado.
+6. **Bitácora:** June llena las columnas Decisión y Por qué de las entradas 1 a 11, marca al menos 2 casos de corrección o rechazo (candidatas: la #6, donde Claude corrigió el eje Y de la gráfica A; y la #4, el diagnóstico de Smart App Control) y elige el **prompt de oro**.
+7. **Hoja de predicciones en papel:** columnas Medido y "¿Por qué la diferencia?" de la #1 a la #7. Transcribir a `predicciones.md` si sirve. Entregar una foto o escaneo.
+8. **Preguntas de validación** de las Fases 1, 2 y 3. Las de la Fase 3 las responde Jonathan **sin IA**.
+9. **Entrega (.zip):** `CLAUDE.md`, `galaxia.cu`, `sabotaje.cu`, `prompts.md`, `bitacora.md`, hoja de predicciones, tablas y gráficas de la Fase 2, GIF, reporte de sabotaje, respuestas de validación y reflexiones individuales.
+
+## Máquina
 
 | | |
 |---|---|
-| GPU | RTX 5070 Laptop, 8 GB, compute capability **12.0** → compilar con `-arch=sm_120` |
-| CUDA | nvcc 13.4 |
-| Potencia | `nvidia-smi --query-gpu=power.draw` **sí reporta** (37.85 W en reposo, máximo 115 W), así que `--energia` debería andar sin `--tdp`. Si fallara: `--tdp 115`. |
-| Python | `python3` = 3.14, `python` = 3.10. El script solo usa la librería estándar. |
+| GPU | RTX 5070 Laptop, 8 GB, cc 12.0, **36 SMs**, 1,536 hilos/SM, 24 bloques/SM, 48 KB de shared por bloque, 32 MB de L2 |
+| Compilar | `nvcc -O3 -arch=sm_120 -o galaxia galaxia.cu` (nvcc 13.4, MSVC 14.51) |
+| Python | `python` (3.12), con matplotlib, numpy y Pillow. **`python3` no existe en PowerShell** |
+| Script del kit | Pasar `./galaxia.exe` (con `.exe`) |
+| Smart App Control | **Desactivado** (bloqueaba los `.exe` sin firma con `WinError 4551`) |
+| Potencia | `nvidia-smi` reporta `power.draw`; `power.limit` = N/A |
 
-Sin verificar: en Windows el binario será `galaxia.exe`; falta confirmar que `verificar_y_medir.py ./galaxia` lo encuentra (si no, pasar `./galaxia.exe`).
+## Comandos útiles
 
-## Contrato del kit (resumen del `kit_galaxia/README.md`)
-
-- **Comando:** `./galaxia <entrada.bin> <salida.bin> <pasos>`.
-- **Archivo:** sin encabezado; 7 `float` LE por estrella (`x,y,z,vx,vy,vz,m`), 28 bytes. N = tamaño / 28. La salida conserva el mismo formato y el mismo orden.
-- **Física:** `d = r_j - r_i`, `r2 = |d|² + EPS2`, `a_i = G · Σ_j m_j · d / (r2 · sqrt(r2))`, sumando **todas** las j, incluida `j = i` (aporta 0).
-- **Integración:** primero las aceleraciones de **todas** las estrellas con las posiciones actuales; después `v += a·DT` y luego `r += v·DT` con la `v` ya nueva.
-- **Precisión:** `float` y las constantes de `kit_galaxia/parametros.h` (`G_CONST=1`, `DT=0.02`, `EPS2=0.0025`).
-- **Tiempo:** imprimir `KERNEL_MS=<ms>`, el total de kernel sobre todos los pasos medido con `cudaEvent`, **sin** `cudaMemcpy`. Se puede imprimir también `MEMCPY_MS=` (el CLAUDE.md lo exige).
-- **Correctitud:** máxima distancia de posición contra la referencia < 10⁻³ (una versión correcta da ~10⁻⁵). Saltarse un bloque de 256 estrellas ya rompe la tolerancia.
-
-Comandos:
-
-```bash
-python3 kit_galaxia/verificar_y_medir.py ./galaxia --equipo "Nombre" --n 4096    # Fase 1
-python3 kit_galaxia/verificar_y_medir.py ./galaxia --equipo "Nombre"             # Gran Premio, N=32768
-python3 kit_galaxia/verificar_y_medir.py ./galaxia --equipo "Nombre" --energia   # Gran Premio Verde
 ```
-
-## Decisiones abiertas (la entrevista quedó aquí)
-
-1. **¿El lab se hace ahora, en vivo (90 min, en clase)?** Está planteado así. Respuesta pendiente.
-2. **¿Solo o en grupo de 3?** Hay que asignar Piloto, Científico y Auditor (rotan en la Fase 4), y la Fase 4 necesita un equipo vecino para intercambiar máquina.
-3. Nombre del equipo (lo usa el script) y la **regla propia** del CLAUDE.md.
-4. Frames del GIF: recomendación, que sean opcionales (por ejemplo un 4.º argumento) para que el benchmark no escriba imágenes ni haga copias extra.
-
-## Orden recomendado
-
-1. **Fase 0:** crear `CLAUDE.md` con las 4 reglas obligatorias (comentario en español en cada cálculo de índice; versión CPU de referencia que imprima el error máximo GPU vs CPU; kernel y `cudaMemcpy` medidos por separado con `cudaEvent`; prohibido Thrust/cuBLAS), la regla propia y una referencia a `kit_galaxia/README.md`. Abrir `bitacora.md` desde ya.
-2. Llenar las predicciones #1 y #2 de la hoja (página 7 del PDF) **antes** de compilar nada.
-3. **Fase 1:** `galaxia.cu` ingenuo, un hilo por estrella, más la versión CPU. Verificar con `--n 4096`.
-4. **Fase 2:** experimentos A (tamaño de bloque, N = 16384), B (escalamiento, N de 1024 a 65536) y C (suma de vectores contra N-body, % de memcpy). Cada uno sigue el ciclo predicción → medición → explicación y lleva tabla y gráfica.
-5. **Fase 3:** versión con tiling en `__shared__` y dos `__syncthreads()`; error contra la ingenua < 10⁻³.
-6. **Fase 4:** `sabotaje.cu` con un solo bug sutil, y la solución en papel.
-7. **Fase 5:** Gran Premio y Gran Premio Verde.
-
-## Trampas conocidas
-
-- **Bitácora:** se escribe en el momento, no al final, y debe coincidir con el historial. Al cerrar, `/export` de Claude Code → `prompts.md`.
-- **Requisitos de la bitácora:** al menos una entrada por fase (0 a 5), al menos 2 casos de rechazo o corrección con una razón técnica, y el "prompt de oro".
-- **Prueba de la línea:** −5 por cada línea del kernel que nadie del grupo sepa explicar.
-- **Temperatura:** la GPU es de laptop. Si el Gran Premio se corre justo después de los experimentos, sale con la GPU caliente y peores números (en el proyecto anterior la misma máquina dio 3x de diferencia por throttling). Hay que dejarla enfriar unos minutos.
-- **OneDrive:** el repo vive dentro de OneDrive y la sincronización de `.exe` nuevos perturba las mediciones. Pausarla al medir, y cerrar juegos y launchers.
+galaxia.exe <entrada.bin> <salida.bin> <pasos> [--kernel ingenuo|tiling] [--bloque B] [--frames K] [--cpu-pasos P] [--vs-ingenuo]
+galaxia.exe --generar <N> <salida.bin>
+python experimentos.py A|B|C|T
+```

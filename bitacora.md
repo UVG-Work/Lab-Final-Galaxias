@@ -16,6 +16,7 @@ Decisión: **Aceptado**, **Aceptado con cambios** o **Rechazado**. Se registra e
 | 8 | 2 | Correr el Experimento C | "ya están la #5 y #6, corre el experimento C" | Tabla y gráfica de barras. Suma de vectores: ~97 % en memcpy, Amdahl máx ≈ 1.03x, y la GPU pierde contra la CPU contando copias (0.35x a 0.41x). N-body: 4.6 % a 0.45 % en memcpy, Amdahl máx de 22x a 221x | (Piloto) | |
 | 9 | 3 | Kernel con tiling en `__shared__` | "sí, sigue con la fase 3 y dame lo que hay q eescribir de nuevo" | `paso_tiling` en `galaxia.cu` (tiles de `blockDim.x` estrellas, dos `__syncthreads()`, los hilos sobrantes no salen antes de las barreras), flags `--kernel` y `--vs-ingenuo`, y `experimentos.py T`. Claude no respondió las preguntas de validación de la Fase 3 porque las contesta el Auditor sin IA. Solo se compiló | (Piloto) | |
 | 10 | 3 | Medir el tiling contra el ingenuo | "ya dale" | Speedup 1.66x (N = 4,096), 1.57x (16,384), 1.07x (32,768) y 1.18x (65,536). Error contra el ingenuo exactamente 0: mismo orden de suma, resultado bit a bit idéntico. Tabla y gráfica en `experimentos/fase3_tiling.*` | (Piloto) | |
+| 11 | 4 | Plantar un solo bug sutil en `sabotaje.cu` | "sigue" | Claude probó 4 candidatos fuera del repo y descartó el que no dejaba síntoma. Plantó uno que compila, corre y pasa la tolerancia del kit, pero deja un síntoma medible. Creó `cazar_sabotaje.bat` para el equipo cazador. La solución está en el papel entregado al catedrático (se completa aquí después de la caza) | (Piloto) | |
 
 ## Prompt de oro
 
