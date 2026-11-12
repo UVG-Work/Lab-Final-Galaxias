@@ -6,7 +6,7 @@
 //           [--frames K] [--cpu-pasos P] [--vs-ingenuo]
 //   galaxia --generar <N> <salida.bin>
 //
-//   --kernel K     ingenuo (Fase 1, por defecto) o tiling (Fase 3, memoria compartida)
+//   --kernel K     tiling (Fase 3, memoria compartida, por defecto) o ingenuo (Fase 1)
 //   --bloque B     hilos por bloque (por defecto 256); en tiling también es el tamaño del tile
 //   --vs-ingenuo   además corre el kernel ingenuo (sin medir) e imprime ERROR_VS_INGENUO
 //   --frames K     guarda un frame PPM en frames/ cada K pasos (solo para el GIF, no para medir)
@@ -362,7 +362,7 @@ int main(int argc, char** argv)
     const char* salida = argv[2];
     int pasos = atoi(argv[3]);
     int bloque = 256, frames_cada = 0, pasos_cpu = -1;
-    bool tiling = false, vs_ingenuo = false;
+    bool tiling = true, vs_ingenuo = false;  // tiling por defecto: es lo que corre el benchmark del kit (sin flags)
     for (int a = 4; a < argc; ++a) {  // a: índice del argumento opcional que se está leyendo
         if (strcmp(argv[a], "--kernel") == 0 && a + 1 < argc) {
             ++a;  // a: ahora apunta al nombre del kernel

@@ -26,11 +26,11 @@ Tablas y gráficas en `experimentos/`. Mediciones crudas de la Fase 1 en `experi
 3. **Después de la caza:** completar la entrada 11 de `bitacora.md` con la solución del bug propio, y hacer commit de `sabotaje.cu` y `cazar_sabotaje.bat`. **No se subieron a GitHub a propósito.**
 4. **Fase 5, Gran Premio:**
    - Andrés escribe a mano las predicciones **#8** (inter/s) y **#9** (inter/J) **antes** de correr.
-   - **Cambiar el kernel por defecto de `galaxia.cu` a `tiling`.** El script del kit corre `galaxia.exe` sin flags, y hoy el default es `ingenuo`.
+   - ~~Cambiar el kernel por defecto de `galaxia.cu` a `tiling`~~ **Hecho**: sin flags corre `tiling`; `--kernel ingenuo` sigue disponible.
    - Opcional: optimizar (por ejemplo `rsqrtf`, `#pragma unroll`, otro tamaño de tile), siempre con error < 1e-3 contra la referencia del kit. Hoy el tiling da ~2.4e11 inter/s con N = 32,768.
    - Antes de medir: dejar enfriar la GPU, pausar OneDrive y cerrar launchers.
    - `python kit_galaxia/verificar_y_medir.py ./galaxia.exe --equipo "<nombre>"` y luego lo mismo con `--energia`. Anotar en la tabla del pizarrón.
-5. **GIF:** `galaxia.exe <entrada> <salida> <pasos> --kernel tiling --frames K` escribe `frames/frame_XXXX.ppm`. Falta el script que arma el GIF; Pillow 12.3 ya está instalado.
+5. **GIF: hecho.** `galaxia.gif` = condiciones oficiales de 32,768, 800 pasos, un frame cada 4 (201 frames, 5.3 MB). Para rehacerlo: `galaxia.exe kit_galaxia\datos\condiciones_32768.bin salida_gif.bin 800 --frames 4` y luego `python hacer_gif.py 40` (ms por frame). El choque ocurre en los primeros ~600 pasos; con más pasos solo se agrega una bola fusionada.
 6. **Bitácora:** June llena las columnas Decisión y Por qué de las entradas 1 a 11, marca al menos 2 casos de corrección o rechazo (candidatas: la #6, donde Claude corrigió el eje Y de la gráfica A; y la #4, el diagnóstico de Smart App Control) y elige el **prompt de oro**.
 7. **Hoja de predicciones en papel:** columnas Medido y "¿Por qué la diferencia?" de la #1 a la #7. Transcribir a `predicciones.md` si sirve. Entregar una foto o escaneo.
 8. **Preguntas de validación** de las Fases 1, 2 y 3. Las de la Fase 3 las responde Jonathan **sin IA**.
